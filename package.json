@@ -10,7 +10,7 @@
     "scripts": {
         "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copyTemplate && npm run copyExampleProject",
         "copyTemplate": "shx cp -r src/core/annotation/template.html dist/cjs/core/annotation/ && shx cp -r src/core/annotation/template.html dist/esm/core/annotation/",
-        "copyExampleProject": "shx cp  -r example_projects_templates/ dist/  && shx cp -r bin/* dist/",
+        "copyExampleProject": "shx cp  -r example_projects_templates/ dist/",
         "lint": "eslint --cache --fix --max-warnings 0 \"./**/*.{js,ts}\"",
         "lint:staged": "lint-staged",
         "test": "jest '/src'",

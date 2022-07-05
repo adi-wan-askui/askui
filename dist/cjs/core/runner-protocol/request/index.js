@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GetProcessPidRequest = exports.StopRecordingRequest = exports.StartRecordingRequest = exports.ReadRecordingRequest = exports.InteractiveAnnotationRequest = exports.ControlRequest = exports.CaptureScreenshotRequest = void 0;
+var capture_screenshot_request_1 = require("./capture-screenshot-request");
+Object.defineProperty(exports, "CaptureScreenshotRequest", { enumerable: true, get: function () { return capture_screenshot_request_1.CaptureScreenshotRequest; } });
+var control_request_1 = require("./control-request");
+Object.defineProperty(exports, "ControlRequest", { enumerable: true, get: function () { return control_request_1.ControlRequest; } });
+var interactive_annotation_request_1 = require("./interactive-annotation-request");
+Object.defineProperty(exports, "InteractiveAnnotationRequest", { enumerable: true, get: function () { return interactive_annotation_request_1.InteractiveAnnotationRequest; } });
+var read_recording_request_1 = require("./read-recording-request");
+Object.defineProperty(exports, "ReadRecordingRequest", { enumerable: true, get: function () { return read_recording_request_1.ReadRecordingRequest; } });
+var start_recording_request_1 = require("./start-recording-request");
+Object.defineProperty(exports, "StartRecordingRequest", { enumerable: true, get: function () { return start_recording_request_1.StartRecordingRequest; } });
+var stop_recording_request_1 = require("./stop-recording-request");
+Object.defineProperty(exports, "StopRecordingRequest", { enumerable: true, get: function () { return stop_recording_request_1.StopRecordingRequest; } });
+var get_server_process_pid_1 = require("./get-server-process-pid");
+Object.defineProperty(exports, "GetProcessPidRequest", { enumerable: true, get: function () { return get_server_process_pid_1.GetProcessPidRequest; } });

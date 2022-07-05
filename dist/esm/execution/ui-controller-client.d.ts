@@ -1,0 +1,30 @@
+import WebSocket from 'ws';
+import { DetectedElement } from '../core/model/annotation-result/detected-element';
+import { CaptureScreenshotResponse, ControlResponse, StartRecordingResponse, StopRecordingResponse, ReadRecordingPartResponse, InteractiveAnnotationResponse, GetProcessPidResponse } from '../core/runner-protocol';
+import { ControlCommand } from '../core/ui-control-commands';
+import { UiControllerClientConnectionState } from './ui-controller-client-connection-state';
+export declare class UiControllerClient {
+    url: string;
+    private static readonly EMPTY_REJECT;
+    private static readonly EMPTY_RESOLVE;
+    private static readonly REQUEST_TIMEOUT_IN_MS;
+    ws: WebSocket;
+    connectionState: UiControllerClientConnectionState;
+    private timeout?;
+    private currentReject;
+    private currentResolve;
+    constructor(url: string);
+    private clearResponse;
+    private onMessage;
+    connect(): Promise<UiControllerClientConnectionState>;
+    close(): void;
+    private sendAndReceive;
+    private send;
+    requestScreenshot(): Promise<CaptureScreenshotResponse>;
+    getServerPid(): Promise<GetProcessPidResponse>;
+    startRecording(): Promise<StartRecordingResponse>;
+    stopRecording(): Promise<StopRecordingResponse>;
+    readRecording(): Promise<ReadRecordingPartResponse>;
+    annotateInteractively(boundingBoxes: DetectedElement[], imageString: string): Promise<InteractiveAnnotationResponse>;
+    requestControl(controlCommand: ControlCommand): Promise<ControlResponse>;
+}
