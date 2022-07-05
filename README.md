@@ -1,51 +1,66 @@
-![askui logo](./docs/static/img/askui_logo-horizontal_negative_rgb_thin.svg#gh-dark-mode-only)
-![askui logo](./docs/static/img/askui_logo-horizontal_positive_rgb_thin.svg#gh-light-mode-only)
+# askui - Humanizing UI Automation
 
-*Reliable, automated end-to-end-testing that only depends on what is shown on your screen instead of the technology or platform you are running on*
-
-<br/>
-
-<center> <h1> Humanizing UI Automation </h1> </center>
+**askui** allows you to automate the interaction with an application, multiple applications or even the entire operating system. 
+You can use this to write end-to-end tests or automate any kind of application.
 
 
-## Disclaimer
+## Start
 
-This repo is a [monorepo](https://en.wikipedia.org/wiki/Monorepo#:~:text=In%20version%20control%20systems%2C%20a,as%20a%20'shared%20codebase'.) consisting mainly of npm packages. We use [workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) to managing the different npm packages etc. This may change in the future as we plan to include also packages, libraries etc. written in other languages in this repo to make the power of askui available to non-typescript/-javascript developers as well.
+To use **askui** follow these steps:
 
-## Installation
+### 0. Create *node.js* project
 
-Simply run an `npm install` inside the root directory.
-
-```sh
-$ npm install
+```
+npm init
 ```
 
-## Contributing
+### 1. Install askui
 
-### Branching
-
-Your branch name should conform to the format `<issue id>-<issue title lower-cased and kebab-cased>`, e.g., let's say you have an issue named *Hello World* with id *AS-101*, the the branch name would be `AS-101-hello-world`. We use the issue id prefix to prepend a link to the issue to the commit message header. In some cases, when doing a quick fix of a typo etc. when there is no issue, feel free to just use a descriptive name of what you are doing, e.g., `fix-typo-in-example-readme`.
-
-### Commit Message Standard
-
-Commit messages should conform to [Conventional Commits Message Standard](https://www.conventionalcommits.org/en/v1.0.0/). Exceptions to this rule may be merge commits.
-
-### Adding Dependencies
-
-The [one version rule](https://opensource.google/documentation/reference/thirdparty/oneversion#:~:text=There%20may%20only%20be%20one,several%20reasons%20for%20this%20restriction.) should be followed as much as possible. In practice, this mean checking if a dependency to be added is already used by another package or meant to be used by multiple packages. If not, install it inside the corresponding package's root directory, e.g., `./packages/askui-nodejs`. If it is shared, install it in the project's root directory and make sure that you only need to depend on this single version in all packages. 
-
-### Githooks
-
-This monorepo uses [githooks](https://git-scm.com/docs/githooks) with [husky](https://github.com/typicode/husky) to lint and test the code, to help you stick to the commit message standard by opening up a cli for constructing the commit message on each commit, prepending the commit message with the issue number or linting the commit message etc. In some cases, e.g., when using a Git client such as [Git Tower](https://www.git-tower.com/) or [GitKraken](https://www.gitkraken.com/), cherry-picking, rebasing or in a ci pipeline, you may want to disable githooks, especially the interactive cli.
-
-For skipping the interactive cli when commiting, set the environment variable `SKIP_CZ_CLI` to `true`.
-```sh
-$ export SKIP_CZ_CLI=true
+```
+npm i -D askui
 ```
 
-For skipping all githooks, set the environment variable `HUSKY` to `0`.
-```sh
-$ export HUSKY=0
+### 2. Install a testing framework
+
+```
+npm i -D jest
 ```
 
-In a ci pipeline, the githooks are skipped by default.
+### 3. Install Typescript
+
+```
+npm i -D @types/jest ts-jest ts-node typescript
+```
+
+### 4. Create a first test suite
+
+```
+npx askui init
+```
+
+## Documentation
+
+Visit our [documentation](https://docs.askui.com) for examples and a full list of supported commands.
+
+### Notes
+
+Important note for Linux users: Currently, Wayland is not supported.
+You can read more in our [troubleshooting chapter](https://docs.askui.com/docs/general/Troubleshooting/askui-ui-controller#wayland).
+If you want to use the askui library libfuse2 is needed ([libfuse2 installation](https://docs.askui.com/docs/general/Troubleshooting/askui-ui-controller#libfuse2)).
+
+## Example
+
+The following example shows the use of **askui** for testing a desktop application.
+
+```typescript
+it('should be able to add to liked songs', async () => {
+    await aui.click().icon().withText('search').exec();
+    await aui.typeIn('Bohemian Rhapsody').textfield().exec();
+    await aui.pressKey('enter').exec();
+    await aui.moveMouseTo().text().withText('Bohemian Rhapsody').below().text().withText('Songs').exec();
+    await aui.mouseRightClick().exec();
+    await aui.click().text().withText('Save to your Liked Songs').exec();
+    await aui.click().text().withText('Liked Songs').exec();
+    await aui.expect().text().withText('Bohemian Rhapsody').exists().exec();
+});
+```

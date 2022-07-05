@@ -1,18 +1,6 @@
-# Dangerous (may contain secrets)
+.eslintcache
+.huskyrc
 .npmrc
 
-# Dependencies
-/node_modules
-
-# Caches
-.npm
-.eslintcache
-
-# Misc
-.DS_Store
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-packages/askui-nodejs/release/*
+dist
+node_modules
